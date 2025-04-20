@@ -18,7 +18,6 @@ export function EmailThread({ thread, onReply, onDelete }: EmailThreadProps) {
   const moreOptionsRef = useRef<HTMLDivElement>(null)
   const moveOptionsRef = useRef<HTMLDivElement>(null)
 
-  // Check if thread has messages
   const messages = thread.messages || [
     {
       id: thread.id,
@@ -30,10 +29,8 @@ export function EmailThread({ thread, onReply, onDelete }: EmailThreadProps) {
     },
   ]
 
-  // Show only the first message if not showing all replies
   const displayMessages = showAllReplies ? messages : [messages[0]]
 
-  // Close dropdowns when clicking outside
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (moreOptionsRef.current && !moreOptionsRef.current.contains(event.target as Node)) {
@@ -51,24 +48,20 @@ export function EmailThread({ thread, onReply, onDelete }: EmailThreadProps) {
   }, [])
 
   const handleMarkAsUnread = () => {
-    // Implement mark as unread functionality
     setShowMoreOptions(false)
     setShowMoveOptions(false)
   }
 
   const handleEditLead = () => {
-    // Implement edit lead functionality
     setShowMoreOptions(false)
     setShowMoveOptions(false)
   }
 
   const handleRemoveLead = () => {
-    // Implement remove lead functionality
     setShowMoveOptions(false)
   }
 
   const handleSetReminder = () => {
-    // Implement set reminder functionality
     setShowMoveOptions(false)
   }
 
@@ -94,7 +87,6 @@ export function EmailThread({ thread, onReply, onDelete }: EmailThreadProps) {
             <ChevronDown size={16} className="ml-2" />
           </Button>
 
-          {/* Move dropdown button */}
           <div className="relative" ref={moveOptionsRef}>
             <Button
               variant="outline"
@@ -106,7 +98,6 @@ export function EmailThread({ thread, onReply, onDelete }: EmailThreadProps) {
               <ChevronDown size={16} className="ml-2" />
             </Button>
 
-            {/* Move dropdown menu */}
             {showMoveOptions && (
               <div className="absolute right-0 mt-1 w-48 bg-white dark:bg-[#171819] rounded-md shadow-lg z-10 border border-[#e0e0e0] dark:border-[#1f1f1f] py-1">
                 <button
@@ -148,7 +139,6 @@ export function EmailThread({ thread, onReply, onDelete }: EmailThreadProps) {
             )}
           </div>
 
-          {/* More options (3-dot) menu */}
           <div className="relative" ref={moreOptionsRef}>
             <Button
               variant="ghost"
@@ -158,8 +148,6 @@ export function EmailThread({ thread, onReply, onDelete }: EmailThreadProps) {
             >
               <MoreHorizontal size={16} />
             </Button>
-
-            {/* More options dropdown */}
             {showMoreOptions && (
               <div className="absolute right-0 mt-1 w-48 bg-white dark:bg-[#171819] rounded-md shadow-lg z-10 border border-[#e0e0e0] dark:border-[#1f1f1f] py-1">
                 <button
