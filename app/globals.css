@@ -75,7 +75,6 @@
   }
 }
 
-/* Gradient button styles */
 .gradient-blue {
   background: linear-gradient(90deg, #4285f4 0%, #5c7cfa 100%);
 }
@@ -84,7 +83,6 @@
   background: linear-gradient(90deg, #3b78e7 0%, #4c6fe3 100%);
 }
 
-/* Dropdown menu styles */
 @layer components {
   .dropdown-menu {
     @apply absolute right-0 mt-1 w-48 bg-white dark:bg-[#171819] rounded-md shadow-lg z-10 border border-[#e0e0e0] dark:border-[#1f1f1f] py-1;
