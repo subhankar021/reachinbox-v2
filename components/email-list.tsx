@@ -20,14 +20,12 @@ export function EmailList({ emails, isLoading, onSelectThread, selectedThreadId 
   const [filter, setFilter] = useState("New Replies")
   const [sortOrder, setSortOrder] = useState("Newest")
 
-  // Filter emails based on search query and filter
   const filteredEmails = emails.filter((email) => {
     const matchesSearch =
       email.subject.toLowerCase().includes(searchQuery.toLowerCase()) ||
       email.from.email.toLowerCase().includes(searchQuery.toLowerCase()) ||
       email.from.name.toLowerCase().includes(searchQuery.toLowerCase())
 
-    // Apply additional filters based on the selected filter
     if (filter === "New Replies") {
       return matchesSearch
     }
@@ -35,7 +33,6 @@ export function EmailList({ emails, isLoading, onSelectThread, selectedThreadId 
     return matchesSearch
   })
 
-  // Sort emails based on sort order
   const sortedEmails = [...filteredEmails].sort((a, b) => {
     if (sortOrder === "Newest") {
       return new Date(b.date).getTime() - new Date(a.date).getTime()
