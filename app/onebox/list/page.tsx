@@ -23,7 +23,6 @@ export default function OneboxListPage() {
   const [showDeleteConfirmation, setShowDeleteConfirmation] = useState(false)
   const { toast } = useToast()
 
-  // Initialize stored emails
   useEffect(() => {
     initializeStoredEmails()
     loadEmails()
@@ -32,18 +31,15 @@ export default function OneboxListPage() {
   const loadEmails = async () => {
     setIsLoading(true)
     try {
-      // Try to fetch from API first
       const apiEmails = await fetchEmails()
       if (apiEmails && apiEmails.length > 0) {
         setEmails(apiEmails)
       } else {
-        // Fallback to stored emails
         const storedEmails = getStoredEmails()
         setEmails(storedEmails)
       }
     } catch (error) {
       console.error("Failed to load emails:", error)
-      // Fallback to stored emails
       const storedEmails = getStoredEmails()
       setEmails(storedEmails)
     } finally {
@@ -56,7 +52,6 @@ export default function OneboxListPage() {
     if (thread) {
       setSelectedThread(thread)
 
-      // Set the lead details
       setSelectedLead({
         name: "Orlando",
         email: "orlando@gmail.com",
@@ -77,14 +72,12 @@ export default function OneboxListPage() {
     if (!selectedThread) return
 
     try {
-      // Try to delete via API
       const success = await deleteEmail(selectedThread.id)
 
       if (success) {
-        // Update local state
         const updatedEmails = emails.filter((email) => email.id !== selectedThread.id)
         setEmails(updatedEmails)
-        storeEmails(updatedEmails) // Update stored emails
+        storeEmails(updatedEmails) 
 
         setSelectedThread(null)
         setShowDeleteConfirmation(false)
@@ -119,7 +112,6 @@ export default function OneboxListPage() {
     try {
       if (!selectedThread) return
 
-      // Create a new message for the thread
       const newMessage: EmailMessage = {
         id: `${selectedThread.id}-${(selectedThread.messages?.length || 0) + 1}`,
         from: {
@@ -132,17 +124,16 @@ export default function OneboxListPage() {
         date: new Date().toISOString(),
       }
 
-      // Update the thread with the new message
       const updatedThread = {
         ...selectedThread,
         messages: [...(selectedThread.messages || []), newMessage],
       }
 
-      // Update the emails array
+   
       const updatedEmails = emails.map((email) => (email.id === selectedThread.id ? updatedThread : email))
 
       setEmails(updatedEmails)
-      storeEmails(updatedEmails) // Update stored emails
+      storeEmails(updatedEmails) 
       setSelectedThread(updatedThread)
 
       toast({
@@ -165,7 +156,7 @@ export default function OneboxListPage() {
     setShowReplyModal(false)
   }
 
-  // Set up keyboard shortcuts
+  
   useKeyboardShortcuts({
     d: () => {
       if (selectedThread) {
@@ -182,7 +173,6 @@ export default function OneboxListPage() {
   return (
     <OneboxLayout>
       <div className="flex h-full bg-black">
-        {/* Email List - Exactly 278px width */}
         <div className="w-[278px] min-w-[278px] max-w-[278px] border-r border-[#1f1f1f] md:block hidden">
           <EmailList
             emails={emails}
@@ -192,7 +182,6 @@ export default function OneboxListPage() {
           />
         </div>
 
-        {/* Email Thread - Fill remaining space */}
         <div className="flex-1 border-r border-[#1f1f1f]">
           {selectedThread ? (
             <EmailThread
@@ -229,13 +218,11 @@ export default function OneboxListPage() {
           )}
         </div>
 
-        {/* Lead Details - Exactly 278px width */}
         <div className="w-[278px] min-w-[278px] max-w-[278px] lg:block hidden">
           {selectedLead && <LeadDetails lead={selectedLead} />}
         </div>
       </div>
 
-      {/* Mobile view controls - only visible on small screens */}
       <div className="md:hidden fixed bottom-0 left-0 right-0 bg-[#101113] border-t border-[#1f1f1f] p-4 flex justify-around">
         <Button variant="ghost" size="sm" className="flex flex-col items-center">
           <svg
@@ -276,7 +263,6 @@ export default function OneboxListPage() {
         </Button>
       </div>
 
-      {/* Reply Modal */}
       {selectedThread && (
         <ReplyModal
           thread={selectedThread}
@@ -286,7 +272,6 @@ export default function OneboxListPage() {
         />
       )}
 
-      {/* Delete Confirmation Dialog */}
       {showDeleteConfirmation && (
         <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
           <div className="bg-white dark:bg-[#171819] rounded-lg p-6 max-w-md w-full mx-4">
