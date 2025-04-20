@@ -1,17 +1,14 @@
 import type { Email } from "./types"
 
-// API base URL
 const API_BASE_URL = "https://hiring.reachinbox.xyz/api/v1"
 
-// Get the auth token from localStorage
 const getAuthToken = () => {
   if (typeof window !== "undefined") {
-    return localStorage.getItem("reachinbox_token") || "demo_token" // Use demo_token as fallback
+    return localStorage.getItem("reachinbox_token") || "demo_token" 
   }
   return "demo_token"
 }
 
-// Common headers for API requests
 const getHeaders = () => {
   return {
     "Content-Type": "application/json",
@@ -19,7 +16,6 @@ const getHeaders = () => {
   }
 }
 
-// Fetch all emails from the onebox list endpoint
 export const fetchEmails = async (): Promise<Email[]> => {
   try {
     const response = await fetch(`${API_BASE_URL}/onebox/list`, {
@@ -35,12 +31,10 @@ export const fetchEmails = async (): Promise<Email[]> => {
     return data.threads || []
   } catch (error) {
     console.error("API Error:", error)
-    // Return mock data as fallback
     return mockEmails
   }
 }
 
-// Fetch a single email thread
 export const fetchEmailThread = async (threadId: string): Promise<Email | null> => {
   try {
     const response = await fetch(`${API_BASE_URL}/onebox/${threadId}`, {
@@ -56,13 +50,11 @@ export const fetchEmailThread = async (threadId: string): Promise<Email | null> 
     return data.thread || null
   } catch (error) {
     console.error("API Error:", error)
-    // Return mock data as fallback
     const email = mockEmails.find((email) => email.id === threadId)
     return email || null
   }
 }
 
-// Delete an email thread
 export const deleteEmail = async (threadId: string): Promise<boolean> => {
   try {
     const response = await fetch(`${API_BASE_URL}/onebox/${threadId}`, {
@@ -77,12 +69,12 @@ export const deleteEmail = async (threadId: string): Promise<boolean> => {
     return true
   } catch (error) {
     console.error("API Error:", error)
-    // For mock data, we'll simulate a successful delete
+    
     return true
   }
 }
 
-// Send a reply to a thread
+
 export const sendReply = async (
   threadId: string,
   replyData: {
@@ -108,24 +100,20 @@ export const sendReply = async (
     return true
   } catch (error) {
     console.error("API Error:", error)
-    // For mock data, we'll simulate a successful reply
     return true
   }
 }
 
-// Google login redirect URL
 export const getGoogleLoginUrl = (redirectUrl: string): string => {
   return `${API_BASE_URL}/auth/google-login?redirect_to=${encodeURIComponent(redirectUrl)}`
 }
 
-// Set the auth token after successful login
 export const setAuthToken = (token: string): void => {
   if (typeof window !== "undefined") {
     localStorage.setItem("reachinbox_token", token)
   }
 }
 
-// Check if user is authenticated
 export const isAuthenticated = (): boolean => {
   if (typeof window !== "undefined") {
     const token = localStorage.getItem("reachinbox_token")
@@ -134,14 +122,12 @@ export const isAuthenticated = (): boolean => {
   return false
 }
 
-// Logout - clear the auth token
 export const logout = (): void => {
   if (typeof window !== "undefined") {
     localStorage.removeItem("reachinbox_token")
   }
 }
 
-// Mock data exactly matching the screenshots
 const mockEmails: Email[] = [
   {
     id: "1",
@@ -239,7 +225,6 @@ Shaw Adley
   },
 ]
 
-// Store emails in localStorage for persistence
 export const getStoredEmails = (): Email[] => {
   if (typeof window !== "undefined") {
     const storedEmails = localStorage.getItem("reachinbox_emails")
@@ -256,7 +241,6 @@ export const storeEmails = (emails: Email[]): void => {
   }
 }
 
-// Initialize stored emails if not already set
 export const initializeStoredEmails = (): void => {
   if (typeof window !== "undefined" && !localStorage.getItem("reachinbox_emails")) {
     storeEmails(mockEmails)
