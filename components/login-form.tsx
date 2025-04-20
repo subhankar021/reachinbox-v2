@@ -10,13 +10,11 @@ export function LoginForm() {
   const router = useRouter()
   const [isLoading, setIsLoading] = useState(false)
 
-  // Check if user is already authenticated
   useEffect(() => {
     if (isAuthenticated()) {
       router.push("/onebox/list")
     }
 
-    // Check for JWT token in URL (after Google OAuth redirect)
     const hash = window.location.hash
     if (hash && hash.includes("token=")) {
       const token = hash.split("token=")[1].split("&")[0]
@@ -29,14 +27,11 @@ export function LoginForm() {
 
   const handleGoogleLogin = () => {
     setIsLoading(true)
-    // Get the current origin for the redirect URL
     const redirectUrl = `${window.location.origin}/google-login`
-    // Redirect to Google login
     window.location.href = getGoogleLoginUrl(redirectUrl)
   }
 
   const handleCreateAccount = () => {
-    // For demo purposes, we'll just redirect to the Google login flow
     handleGoogleLogin()
   }
 
