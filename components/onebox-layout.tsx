@@ -27,7 +27,6 @@ export function OneboxLayout({ children }: OneboxLayoutProps) {
 
   return (
     <div className="flex h-screen bg-black text-black dark:text-white overflow-hidden">
-      {/* Mobile menu overlay */}
       {showMobileMenu && (
         <div className="fixed inset-0 bg-black/80 z-50 md:hidden" onClick={() => setShowMobileMenu(false)}>
           <div className="w-64 h-full bg-white dark:bg-[#101113] p-4" onClick={(e) => e.stopPropagation()}>
@@ -70,7 +69,6 @@ export function OneboxLayout({ children }: OneboxLayoutProps) {
         </div>
       )}
 
-      {/* Left Sidebar */}
       <div className="w-16 bg-black dark:bg-black flex-shrink-0 flex flex-col items-center py-4 border-r border-[#1f1f1f] hidden md:flex">
         <div className="mb-8">
           <div className="w-8 h-8">
@@ -136,9 +134,7 @@ export function OneboxLayout({ children }: OneboxLayoutProps) {
         </div>
       </div>
 
-      {/* Main Content */}
       <div className="flex-1 flex flex-col bg-black">
-        {/* Header */}
         <header className="h-16 border-b border-[#1f1f1f] flex items-center justify-between px-4 bg-black">
           <div className="flex items-center">
             <Button variant="ghost" size="icon" className="md:hidden mr-2" onClick={() => setShowMobileMenu(true)}>
@@ -164,7 +160,6 @@ export function OneboxLayout({ children }: OneboxLayoutProps) {
           </div>
         </header>
 
-        {/* Content */}
         <main className="flex-1 overflow-auto bg-black">{children}</main>
       </div>
     </div>
