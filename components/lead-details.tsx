@@ -76,7 +76,6 @@ export function LeadDetails({ lead }: LeadDetailsProps) {
           </div>
 
           <div className="space-y-6 mt-6">
-            {/* Step 1 */}
             <div className="flex">
               <div className="mr-4 flex flex-col items-center">
                 <div className="w-8 h-8 dark:bg-[#25262b] bg-[#e5e8ec] rounded-full flex items-center justify-center">
@@ -120,7 +119,6 @@ export function LeadDetails({ lead }: LeadDetailsProps) {
               </div>
             </div>
 
-            {/* Step 2 */}
             <div className="flex" style={{ marginTop: "0px" }}>
               <div className="mr-4 flex flex-col items-center">
                 <div className="w-8 h-8 dark:bg-[#25262b] bg-[#e5e8ec] rounded-full flex items-center justify-center">
@@ -165,7 +163,6 @@ export function LeadDetails({ lead }: LeadDetailsProps) {
               </div>
             </div>
 
-            {/* Step 3 */}
             <div className="flex" style={{ marginTop: "0px" }}>
               <div className="mr-4 flex flex-col items-center">
                 <div className="w-8 h-8 dark:bg-[#25262b] bg-[#e5e8ec] rounded-full flex items-center justify-center">
