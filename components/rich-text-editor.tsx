@@ -29,7 +29,6 @@ export const RichTextEditor = forwardRef<HTMLDivElement, RichTextEditorProps>(({
   }
 
   const handleSave = () => {
-    // Save functionality
     const content = ref?.current?.innerHTML || ""
     onChange(content)
   }
