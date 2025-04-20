@@ -21,7 +21,6 @@ export function AITemplateSuggestions({ threadContext, onSelectTemplate }: AITem
   const [templates, setTemplates] = useState<Template[]>([])
   const [activeCategory, setActiveCategory] = useState("all")
 
-  // Mock templates - in a real app, these would be generated based on the thread context
   const mockTemplates: Template[] = [
     {
       id: "1",
@@ -60,11 +59,9 @@ export function AITemplateSuggestions({ threadContext, onSelectTemplate }: AITem
   ]
 
   useEffect(() => {
-    // Simulate API call to get AI-generated templates based on thread context
     const fetchTemplates = async () => {
       setIsLoading(true)
-      // In a real app, we would send the thread context to an API
-      // and get back AI-generated template suggestions
+     
       await new Promise((resolve) => setTimeout(resolve, 1000))
       setTemplates(mockTemplates)
       setIsLoading(false)
