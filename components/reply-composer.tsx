@@ -41,17 +41,17 @@ export function ReplyComposer({ thread, onSend, onCancel }: ReplyComposerProps) 
   const handleSend = async () => {
     setIsSending(true)
     try {
-      // Format the data according to the API requirements
       const replyData = {
         fromName,
         from,
         to,
         subject,
         body,
-        references: {}, // Add any references if needed
+        references: {}, 
+        
       }
 
-      // Send the reply using the API
+      
       const success = await sendReply(thread.id, replyData)
 
       if (success) {
