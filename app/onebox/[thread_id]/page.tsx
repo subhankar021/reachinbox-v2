@@ -24,7 +24,6 @@ export default function ThreadPage() {
   const [showReplyComposer, setShowReplyComposer] = useState(false)
   const [showDeleteConfirmation, setShowDeleteConfirmation] = useState(false)
 
-  // Check authentication
   useEffect(() => {
     if (!isAuthenticated()) {
       router.push("/")
@@ -46,13 +45,13 @@ export default function ThreadPage() {
             date: data.date,
           })
 
-          // Set the lead details
+     
           setSelectedLead({
             name: data.from.name,
             email: data.from.email,
-            phone: "9999999999", // From the screenshot
-            linkedin: "www.linkedin.com/johndoe", // From the screenshot
-            company: "ReachInbox", // From the screenshot
+            phone: "9999999999",
+            linkedin: "www.linkedin.com/johndoe", 
+            company: "ReachInbox", 
             campaign: {
               name: "Campaign name",
               steps: 3,
@@ -112,7 +111,7 @@ export default function ThreadPage() {
     body: string
   }) => {
     try {
-      // This is now handled in the ReplyComposer component
+      
       toast({
         title: "Success",
         description: "Reply sent successfully.",
@@ -134,7 +133,7 @@ export default function ThreadPage() {
     setShowReplyComposer(false)
   }
 
-  // Set up keyboard shortcuts
+  
   useKeyboardShortcuts({
     d: () => {
       if (thread) {
@@ -189,7 +188,7 @@ export default function ThreadPage() {
         <div className="w-1/4">{selectedLead && <LeadDetails lead={selectedLead} />}</div>
       </div>
 
-      {/* Delete Confirmation Dialog */}
+      
       {showDeleteConfirmation && (
         <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
           <div className="bg-[#1a1a1a] rounded-lg p-6 max-w-md w-full">
