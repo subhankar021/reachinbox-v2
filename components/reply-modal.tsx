@@ -31,17 +31,13 @@ export function ReplyModal({ thread, onSend, onCancel, isOpen }: ReplyModalProps
   const textareaRef = useRef<HTMLTextAreaElement>(null)
   const modalRef = useRef<HTMLDivElement>(null)
 
-  // Set the email data based on the thread
   useEffect(() => {
     if (thread) {
-      // Extract data from the thread
       if (thread.from.email === "mitrajit2022@gmail.com") {
-        // First email format
         setFrom("mitrajit2022@gmail.com")
         setTo("shaw@getmemeetings.com")
         setSubject(`Shaw - following up on our meeting last week... | 7ZG2ZTV 6KG634E`)
       } else {
-        // Second email format
         setFrom("shaw@getmemeetings.com")
         setTo("mitrajit2022@gmail.com")
         setSubject(`Test mail`)
@@ -81,7 +77,6 @@ export function ReplyModal({ thread, onSend, onCancel, isOpen }: ReplyModalProps
         body,
       }
 
-      // const success = await sendReply(thread.id, replyData)
 
       if (true) {
         toast({
