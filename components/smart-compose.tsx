@@ -13,7 +13,6 @@ export function SmartCompose({ currentText, onSuggestionAccept }: SmartComposePr
   const [isVisible, setIsVisible] = useState(false)
   const suggestionRef = useRef<HTMLDivElement>(null)
 
-  // Common phrases to suggest based on the current text
   const phrases = [
     { trigger: "thank", completion: " you for your interest in our services." },
     { trigger: "looking forward", completion: " to hearing from you soon." },
@@ -32,7 +31,6 @@ export function SmartCompose({ currentText, onSuggestionAccept }: SmartComposePr
       return
     }
 
-    // Check if the current text ends with any of the trigger phrases
     const lowerText = currentText.toLowerCase()
     for (const phrase of phrases) {
       if (lowerText.endsWith(phrase.trigger)) {
@@ -42,7 +40,6 @@ export function SmartCompose({ currentText, onSuggestionAccept }: SmartComposePr
       }
     }
 
-    // If no match, hide the suggestion
     setSuggestion(null)
     setIsVisible(false)
   }, [currentText])
@@ -55,7 +52,6 @@ export function SmartCompose({ currentText, onSuggestionAccept }: SmartComposePr
     }
   }
 
-  // Handle keyboard shortcut (Tab) to accept suggestion
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === "Tab" && isVisible && suggestion) {
