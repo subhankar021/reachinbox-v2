@@ -10,9 +10,7 @@ export default function GoogleLoginPage() {
   const [error, setError] = useState<string | null>(null)
 
   useEffect(() => {
-    // Extract token from URL hash or query parameters
     const processToken = () => {
-      // Check URL hash first (fragment identifier)
       const hash = window.location.hash
       if (hash && hash.includes("token=")) {
         const token = hash.split("token=")[1].split("&")[0]
@@ -23,7 +21,6 @@ export default function GoogleLoginPage() {
         }
       }
 
-      // Check query parameters
       const urlParams = new URLSearchParams(window.location.search)
       const token = urlParams.get("token")
       if (token) {
@@ -32,14 +29,12 @@ export default function GoogleLoginPage() {
         return
       }
 
-      // Check if there's an error parameter
       const errorMsg = urlParams.get("error")
       if (errorMsg) {
         setError(errorMsg)
         return
       }
 
-      // If no token found after 3 seconds, show an error
       const timer = setTimeout(() => {
         setError("No authentication token received. Please try again.")
       }, 3000)
